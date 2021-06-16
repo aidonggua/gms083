@@ -56,7 +56,7 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
         } else {
             if (!YamlConfig.config.server.USE_MTS) {
                 // 魔改：关闭拍卖功能之后 点拍卖效果为打开npc
-                NPCScriptManager.getInstance().start(c, 9900004, c.getPlayer());
+                c.getAbstractPlayerInteraction().openNpc(9201143, "paimai");
                 // c.announce(MaplePacketCreator.enableActions());
                 return;
             }
