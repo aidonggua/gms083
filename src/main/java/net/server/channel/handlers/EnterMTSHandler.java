@@ -36,6 +36,7 @@ import client.inventory.Item;
 import client.processor.action.BuybackProcessor;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
+import scripting.npc.NPCScriptManager;
 import server.MTSItemInfo;
 import server.maps.FieldLimit;
 import server.maps.MapleMiniDungeonInfo;
@@ -48,30 +49,30 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         MapleCharacter chr = c.getPlayer();
-        
-        if(!chr.isAlive() && YamlConfig.config.server.USE_BUYBACK_SYSTEM) {
+
+        if (!chr.isAlive() && YamlConfig.config.server.USE_BUYBACK_SYSTEM) {
             BuybackProcessor.processBuyback(c);
             c.announce(MaplePacketCreator.enableActions());
         } else {
             if (!YamlConfig.config.server.USE_MTS) {
                 // 魔改：关闭拍卖功能之后 点拍卖效果为打开npc
-                chr.getAbstractPlayerInteraction().npcTalk(9000020, "拍卖");
+                NPCScriptManager.getInstance().start(c, 9900004, null);
                 c.announce(MaplePacketCreator.enableActions());
                 return;
             }
 
-            if(chr.getEventInstance() != null) {
+            if (chr.getEventInstance() != null) {
                 c.announce(MaplePacketCreator.serverNotice(5, "Entering Cash Shop or MTS are disabled when registered on an event."));
                 c.announce(MaplePacketCreator.enableActions());
                 return;
             }
-            
-            if(MapleMiniDungeonInfo.isDungeonMap(chr.getMapId())) {
+
+            if (MapleMiniDungeonInfo.isDungeonMap(chr.getMapId())) {
                 c.announce(MaplePacketCreator.serverNotice(5, "Changing channels or entering Cash Shop or MTS are disabled when inside a Mini-Dungeon."));
                 c.announce(MaplePacketCreator.enableActions());
                 return;
             }
-            
+
             if (FieldLimit.CANNOTMIGRATE.check(chr.getMap().getFieldLimit())) {
                 chr.dropMessage(1, "You can't do it here in this map.");
                 c.announce(MaplePacketCreator.enableActions());
@@ -90,7 +91,7 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
 
             chr.closePlayerInteractions();
             chr.closePartySearchInteractions();
-            
+
             chr.unregisterChairBuff();
             Server.getInstance().getPlayerBuffStorage().addBuffsToStorage(chr.getId(), chr.getAllBuffs());
             Server.getInstance().getPlayerBuffStorage().addDiseasesToStorage(chr.getId(), chr.getAllDiseases());
@@ -108,7 +109,7 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
             chr.cancelQuestExpirationTask();
 
             chr.saveCharToDB();
-            
+
             c.getChannelServer().removePlayer(chr);
             chr.getMap().removePlayer(c.getPlayer());
             try {
@@ -130,7 +131,14 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                     if (rs.getInt("type") != 1) {
                         Item i = new Item(rs.getInt("itemid"), (short) 0, (short) rs.getInt("quantity"));
                         i.setOwner(rs.getString("owner"));
-                        items.add(new MTSItemInfo(i, rs.getInt("price") + 100 + (int) (rs.getInt("price") * 0.1), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+                        items.add(new MTSItemInfo(
+                                i,
+                                rs.getInt("price") + 100 + (int) (rs.getInt("price") * 0.1),
+                                rs.getInt("id"),
+                                rs.getInt("seller"),
+                                rs.getString("sellername"),
+                                rs.getString("sell_ends")
+                        ));
                     } else {
                         Equip equip = new Equip(rs.getInt("itemid"), (byte) rs.getInt("position"), -1);
                         equip.setOwner(rs.getString("owner"));
@@ -159,8 +167,15 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                         equip.setRingId(rs.getInt("ringid"));
                         equip.setExpiration(rs.getLong("expiration"));
                         equip.setGiftFrom(rs.getString("giftFrom"));
-                        
-                        items.add(new MTSItemInfo((Item) equip, rs.getInt("price") + 100 + (int) (rs.getInt("price") * 0.1), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+
+                        items.add(new MTSItemInfo(
+                                (Item) equip,
+                                rs.getInt("price") + 100 + (int) (rs.getInt("price") * 0.1),
+                                rs.getInt("id"),
+                                rs.getInt("seller"),
+                                rs.getString("sellername"),
+                                rs.getString("sell_ends")
+                        ));
                     }
                 }
                 rs.close();
@@ -194,7 +209,14 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                         if (rs.getInt("type") != 1) {
                             Item i = new Item(rs.getInt("itemid"), (short) 0, (short) rs.getInt("quantity"));
                             i.setOwner(rs.getString("owner"));
-                            items.add(new MTSItemInfo((Item) i, rs.getInt("price"), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+                            items.add(new MTSItemInfo(
+                                    (Item) i,
+                                    rs.getInt("price"),
+                                    rs.getInt("id"),
+                                    rs.getInt("seller"),
+                                    rs.getString("sellername"),
+                                    rs.getString("sell_ends")
+                            ));
                         } else {
                             Equip equip = new Equip(rs.getInt("itemid"), (byte) rs.getInt("position"), -1);
                             equip.setOwner(rs.getString("owner"));
@@ -223,7 +245,14 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                             equip.setFlag((short) rs.getInt("flag"));
                             equip.setExpiration(rs.getLong("expiration"));
                             equip.setGiftFrom(rs.getString("giftFrom"));
-                            items.add(new MTSItemInfo((Item) equip, rs.getInt("price"), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+                            items.add(new MTSItemInfo(
+                                    (Item) equip,
+                                    rs.getInt("price"),
+                                    rs.getInt("id"),
+                                    rs.getInt("seller"),
+                                    rs.getString("sellername"),
+                                    rs.getString("sell_ends")
+                            ));
                         }
                     }
                 }
@@ -246,7 +275,14 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                         if (rs.getInt("type") != 1) {
                             Item i = new Item(rs.getInt("itemid"), (short) 0, (short) rs.getInt("quantity"));
                             i.setOwner(rs.getString("owner"));
-                            items.add(new MTSItemInfo((Item) i, rs.getInt("price"), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+                            items.add(new MTSItemInfo(
+                                    (Item) i,
+                                    rs.getInt("price"),
+                                    rs.getInt("id"),
+                                    rs.getInt("seller"),
+                                    rs.getString("sellername"),
+                                    rs.getString("sell_ends")
+                            ));
                         } else {
                             Equip equip = new Equip(rs.getInt("itemid"), (byte) rs.getInt("position"), -1);
                             equip.setOwner(rs.getString("owner"));
@@ -275,7 +311,14 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
                             equip.setFlag((short) rs.getInt("flag"));
                             equip.setExpiration(rs.getLong("expiration"));
                             equip.setGiftFrom(rs.getString("giftFrom"));
-                            items.add(new MTSItemInfo((Item) equip, rs.getInt("price"), rs.getInt("id"), rs.getInt("seller"), rs.getString("sellername"), rs.getString("sell_ends")));
+                            items.add(new MTSItemInfo(
+                                    (Item) equip,
+                                    rs.getInt("price"),
+                                    rs.getInt("id"),
+                                    rs.getInt("seller"),
+                                    rs.getString("sellername"),
+                                    rs.getString("sell_ends")
+                            ));
                         }
                     }
                 }
