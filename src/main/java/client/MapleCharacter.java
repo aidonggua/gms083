@@ -933,7 +933,8 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
     }
 
     public void Hide(boolean hide, boolean login) {
-        if (isGM() && hide != this.hidden) {
+        // 魔改：去掉隐身效果，加上false
+        if (false && isGM() && hide != this.hidden) {
             if (!hide) {
                 this.hidden = false;
                 announce(MaplePacketCreator.getGMEffect(0x10, (byte) 0));
