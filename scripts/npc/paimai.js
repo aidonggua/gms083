@@ -26,7 +26,6 @@ function goto() {
 
 function start() {
     status = -1;
-    writeHeavenMSCommands();
     action(1, 0, 0);
 }
 
