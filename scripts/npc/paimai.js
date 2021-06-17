@@ -4,10 +4,8 @@ importPackage(Packages.client.command);
 
 var status;
 var menu = ["传送"]
-var maps = [
-    {name: "魔法密林", code: "100000"},
-    {name: "魔法密林", code: "100000"}
-]
+var mapNames = ["彩虹村", "明珠港", "魔法密林", "射手村", "废弃都市", "勇士部落"]
+var mapIds = [1000000, 100000000, 101000000, 130000000, 103000000, 102000000]
 
 function handleMenu() {
     var sendStr = "快捷服务：\r\n\r\n#b";
@@ -19,8 +17,8 @@ function handleMenu() {
 
 function handleMap() {
     var sendStr = "地图：\r\n\r\n#b";
-    for (var i = 0; i < maps.length; i++) {
-        sendStr += "#L" + (1000 + i) + "#" + maps[i].name + "#l\r\n";
+    for (var i = 0; i < mapNames.length; i++) {
+        sendStr += "#L" + (1000 + i) + "#" + mapNames[i] + "#l\r\n";
     }
 }
 
@@ -48,8 +46,8 @@ function action(mode, type, selection) {
             }
         } else if (status == 2) {
             if (selection >= 1000 && selection < 2000) {
-                var mapCode = maps[selection - 1000]
-                // 传送到mapCode
+                var mapId = mapIds[selection - 1000]
+                cm.getPlayer().changeMap(mapId)
                 cm.dispose();
             } else {
                 cm.sendPrev("功能待完善");
