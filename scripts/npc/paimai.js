@@ -45,6 +45,7 @@ function action(mode, type, selection) {
                 cm.sendPrev("功能待完善");
             }
         } else if (status == 2) {
+            cm.sendPrev("debug: " + selection);
             if (selection >= 1000 && selection < 2000) {
                 var mapId = mapIds[selection - 1000]
                 cm.getPlayer().changeMap(mapId)
