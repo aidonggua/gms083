@@ -1,23 +1,27 @@
-/* @Author Ronan
- * @Author Vcoc
-        Name: Steward
-        Map(s): Foyer
-        Info: Commands
-        Script: commands.js
-*/
+/* @Author melon */
 
 importPackage(Packages.client.command);
 
 var status;
+var menu = ["传送"]
+var map = [
+    {name: '魔法密林', code: '100000'},
+    {name: '魔法密林', code: '100000'},
+]
 
-var common_heading = "@";
-var staff_heading = "!";
+function menu() {
+    var sendStr = "快捷服务：\r\n\r\n#b";
+    for (var i = 0; i <= menu.length; i++) {
+        sendStr += "#L" + i + "#" + menu[i] + "#l\r\n";
+    }
+    return sendStr
+}
 
-var levels = ["Common", "Donator", "JrGM", "GM", "SuperGM", "Developer", "Admin"];
-var commands;
-
-function writeHeavenMSCommands() {
-    commands = CommandsExecutor.getInstance().getGmCommands();
+function goto() {
+    var sendStr = "地图：\r\n\r\n#b";
+    for (var i = 0; i <= map.length; i++) {
+        sendStr += "#L" + (1000 + i) + "#" + map[i].name + "#l\r\n";
+    }
 }
 
 function start() {
@@ -34,39 +38,26 @@ function action(mode, type, selection) {
             cm.dispose();
             return;
         }
-        if (mode == 1)
-            status++;
-        else
-            status--;
-
+        if (mode == 1) status++; else status--;
         if (status == 0) {
-            var sendStr = "There are all available commands for you:\r\n\r\n#b";
-            for(var i = 0; i <= cm.getPlayer().gmLevel(); i++) {
-                sendStr += "#L" + i + "#" + levels[i] + "#l\r\n";
+            cm.sendSimple(menu());
+        } else if (status == 1) {
+            if (selection == 0) {
+                cm.sendPrev(goto());
+            } else {
+                cm.sendPrev("功能待完善");
             }
-
-            cm.sendSimple(sendStr);
-        } else if(status == 1) {
-            var lvComm, lvDesc, lvHead = (selection < 2) ? common_heading : staff_heading;
-
-            if(selection > 6) {
-                selection = 6;
-            } else if(selection < 0) {
-                selection = 0;
+        } else if (status == 2) {
+            if (selection >= 1000 && selection < 2000) {
+                var mapCode = map[selection - 1000]
+                // 传送到mapCode
+                cm.dispose();
+            } else {
+                cm.sendPrev("功能待完善");
             }
-
-            lvComm = commands.get(selection).getLeft();
-            lvDesc = commands.get(selection).getRight();
-
-            var sendStr = "The following commands are available for #b" + levels[selection] + "#k:\r\n\r\n";
-            for(var i = 0; i < lvComm.size(); i++) {
-                sendStr += "  #L" + i + "# " + lvHead + lvComm.get(i) + " - " + lvDesc.get(i);
-                sendStr += "#l\r\n";
-            }
-
-            cm.sendPrev(sendStr);
         } else {
             cm.dispose();
         }
     }
 }
+
