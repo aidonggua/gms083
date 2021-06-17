@@ -42,7 +42,7 @@ function action(mode, type, selection) {
             cm.sendSimple(handleMenu());
         } else if (status == 1) {
             if (selection == 0) {
-                cm.sendPrev(goto());
+                cm.sendPrev(handleMap());
             } else {
                 cm.sendPrev("功能待完善");
             }
