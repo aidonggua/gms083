@@ -47,8 +47,7 @@ public class SpCommand extends Command {
             if (newSp < 0) newSp = 0;
             else if (newSp > YamlConfig.config.server.MAX_AP) newSp = YamlConfig.config.server.MAX_AP;
 
-            // player.updateRemainingSp(newSp);
-            player.gainSp(newSp, GameConstants.getSkillBook(player.getJob().getId()), true);
+             player.updateRemainingSp(newSp);
         } else {
             MapleCharacter victim = c.getWorldServer().getPlayerStorage().getCharacterByName(params[0]);
             if (victim != null) {
