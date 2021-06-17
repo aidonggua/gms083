@@ -999,7 +999,26 @@ public class MapleItemInformationProvider {
                 }
             }
         }
+
+        magicModifyScroll(equip);
+
         return equip;
+    }
+
+    /**
+     * 魔改：无论任何装备都可以强化到100，强化到100之前，不扣强化次数，强化等级到100，强化次数清0
+     *
+     * @author yehao
+     * @date 2021/6/11
+     */
+    public static void magicModifyScroll(Item equip) {
+        Equip nEquip = (Equip) equip;
+        byte level = nEquip.getLevel();
+        if (level < 100) {
+            nEquip.setUpgradeSlots((byte) (nEquip.getUpgradeSlots() + 1));
+        } else {
+            nEquip.setUpgradeSlots((byte) 0);
+        }
     }
 
     public static void improveEquipStats(Equip nEquip, Map<String, Integer> stats) {
