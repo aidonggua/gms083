@@ -262,7 +262,8 @@ public class MapleSkillbookInformationProvider {
     }
 
     private static void fetchSkillbooksFromScripts() {
-        filterScriptDirectorySearchMatchingData(new ClassPathResource("scripts").getAbsolutePath());
+        //filterScriptDirectorySearchMatchingData(new ClassPathResource("scripts").getAbsolutePath());
+        filterScriptDirectorySearchMatchingData("scripts");
     }
 
     private static void loadSkillbooks() {

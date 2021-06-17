@@ -22,17 +22,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package scripting;
 
 import client.MapleClient;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-import javax.script.*;
-
 import cn.hutool.core.io.resource.ClassPathResource;
 import constants.net.ServerConstants;
 import jdk.nashorn.api.scripting.NashornScriptEngine;
 import tools.FilePrinter;
+
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -46,11 +46,16 @@ public abstract class AbstractScriptManager {
     }
 
     protected NashornScriptEngine getScriptEngine(String path) {
+//        path = "scripts/" + path;
+//        File scriptFile;
+//        try {
+//            scriptFile = new ClassPathResource(path).getFile();
+//        }catch (Exception e){
+//            return null;
+//        }
         path = "scripts/" + path;
-        File scriptFile;
-        try {
-            scriptFile = new ClassPathResource(path).getFile();
-        }catch (Exception e){
+        File scriptFile = new File(path);
+        if (!scriptFile.exists()) {
             return null;
         }
         NashornScriptEngine engine = (NashornScriptEngine) sef.getScriptEngine();

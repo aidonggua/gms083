@@ -483,7 +483,8 @@ public final class Channel {
     
     private static String [] getEvents(){
     	List<String> events = new ArrayList<String>();
-    	for (File file : new ClassPathResource("scripts/event").getFile().listFiles()){
+    	//for (File file : new ClassPathResource("scripts/event").getFile().listFiles()){
+        for (File file : new File("scripts/event").listFiles()){
             events.add(file.getName().substring(0, file.getName().length() - 3));
     	}
     	return events.toArray(new String[0]);
