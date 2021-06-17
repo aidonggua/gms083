@@ -4,7 +4,7 @@ importPackage(Packages.client.command);
 
 var status;
 var menu = ["传送"]
-var map = [
+var maps = [
     {name: '魔法密林', code: '100000'},
     {name: '魔法密林', code: '100000'},
 ]
@@ -19,8 +19,8 @@ function handleMenu() {
 
 function handleMap() {
     var sendStr = "地图：\r\n\r\n#b";
-    for (var i = 0; i <= map.length; i++) {
-        sendStr += "#L" + (1000 + i) + "#" + map[i].name + "#l\r\n";
+    for (var i = 0; i <= maps.length; i++) {
+        sendStr += "#L" + (1000 + i) + "#" + maps[i].name + "#l\r\n";
     }
 }
 
@@ -48,7 +48,7 @@ function action(mode, type, selection) {
             }
         } else if (status == 2) {
             if (selection >= 1000 && selection < 2000) {
-                var mapCode = map[selection - 1000]
+                var mapCode = maps[selection - 1000]
                 // 传送到mapCode
                 cm.dispose();
             } else {
