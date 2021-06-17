@@ -5,8 +5,8 @@ importPackage(Packages.client.command);
 var status;
 var menu = ["传送"]
 var maps = [
-    {name: '魔法密林', code: '100000'},
-    {name: '魔法密林', code: '100000'},
+    {name: "魔法密林", code: "100000"},
+    {name: "魔法密林", code: "100000"}
 ]
 
 function handleMenu() {
