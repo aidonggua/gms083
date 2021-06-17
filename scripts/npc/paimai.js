@@ -11,7 +11,7 @@ var maps = [
 
 function handleMenu() {
     var sendStr = "快捷服务：\r\n\r\n#b";
-    for (var i = 0; i <= menu.length; i++) {
+    for (var i = 0; i < menu.length; i++) {
         sendStr += "#L" + i + "#" + menu[i] + "#l\r\n";
     }
     return sendStr
@@ -19,7 +19,7 @@ function handleMenu() {
 
 function handleMap() {
     var sendStr = "地图：\r\n\r\n#b";
-    for (var i = 0; i <= maps.length; i++) {
+    for (var i = 0; i < maps.length; i++) {
         sendStr += "#L" + (1000 + i) + "#" + maps[i].name + "#l\r\n";
     }
 }
