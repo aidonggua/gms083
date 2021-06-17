@@ -9,7 +9,7 @@ var map = [
     {name: '魔法密林', code: '100000'},
 ]
 
-function menu() {
+function handleMenu() {
     var sendStr = "快捷服务：\r\n\r\n#b";
     for (var i = 0; i <= menu.length; i++) {
         sendStr += "#L" + i + "#" + menu[i] + "#l\r\n";
@@ -17,7 +17,7 @@ function menu() {
     return sendStr
 }
 
-function goto() {
+function handleMap() {
     var sendStr = "地图：\r\n\r\n#b";
     for (var i = 0; i <= map.length; i++) {
         sendStr += "#L" + (1000 + i) + "#" + map[i].name + "#l\r\n";
@@ -39,7 +39,7 @@ function action(mode, type, selection) {
         }
         if (mode == 1) status++; else status--;
         if (status == 0) {
-            cm.sendSimple(menu());
+            cm.sendSimple(handleMenu());
         } else if (status == 1) {
             if (selection == 0) {
                 cm.sendPrev(goto());
