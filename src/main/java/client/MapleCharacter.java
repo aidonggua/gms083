@@ -6433,8 +6433,10 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         if (GameConstants.getJobBranch(job) == 0) {
             return;
         }
-        
-        int spGain = 3;
+
+        // 魔改：升级给10点技能点
+        // int spGain = 3;
+        int spGain = 10;
         if (YamlConfig.config.server.USE_ENFORCE_JOB_SP_RANGE && !GameConstants.hasSPTable(job)) {
             spGain = getSpGain(spGain, job);
         }
