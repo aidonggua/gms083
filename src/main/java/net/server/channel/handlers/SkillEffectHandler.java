@@ -52,7 +52,7 @@ public final class SkillEffectHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
         int skillId = slea.readInt();
-        log.debug("[{}] 使用技能：{}", c.getPlayer().getName(), skillId);
+        log.info("[{}] 使用特效技能：{}", c.getPlayer().getName(), skillId);
         int level = slea.readByte();
         byte flags = slea.readByte();
         int speed = slea.readByte();

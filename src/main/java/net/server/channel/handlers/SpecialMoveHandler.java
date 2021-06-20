@@ -25,6 +25,8 @@ import java.awt.Point;
 
 import config.YamlConfig;
 import net.AbstractMaplePacketHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import server.MapleStatEffect;
 import server.life.MapleMonster;
 import tools.MaplePacketCreator;
@@ -43,7 +45,9 @@ import constants.skills.SuperGM;
 import net.server.Server;
 
 public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
-    
+
+    private final static Logger log = LoggerFactory.getLogger(SpecialMoveHandler.class);
+
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
     	MapleCharacter chr = c.getPlayer();
@@ -63,6 +67,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
         Point pos = null;
         int __skillLevel = slea.readByte();
         Skill skill = SkillFactory.getSkill(skillid);
+        log.info("[{}] 使用位移技能：{}", c.getPlayer().getName(), skillid);
         int skillLevel = chr.getSkillLevel(skill);
         if (skillid % 10000000 == 1010 || skillid % 10000000 == 1011) {
             if (chr.getDojoEnergy() < 10000) { // PE hacking or maybe just lagging
