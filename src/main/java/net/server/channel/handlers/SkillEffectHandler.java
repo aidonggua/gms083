@@ -76,11 +76,9 @@ public final class SkillEffectHandler extends AbstractMaplePacketHandler {
             case Hero.MONSTER_MAGNET:
             case Evan.FIRE_BREATH:
             case Evan.ICE_BREATH:
-                c.getPlayer().getMap().broadcastMessage(
-                        c.getPlayer(),
-                        MaplePacketCreator.skillEffect(c.getPlayer(), skillId, level, flags, speed, aids),
-                        false
-                );
+                c.getPlayer()
+                        .getMap()
+                        .broadcastMessage(c.getPlayer(), MaplePacketCreator.skillEffect(c.getPlayer(), skillId, level, flags, speed, aids), false);
                 return;
             default:
                 System.out.println(c.getPlayer() + " entered SkillEffectHandler without being handled using " + skillId + ".");
