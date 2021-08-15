@@ -32,6 +32,14 @@ var monsterMaps = [
     {name: "武陵", code: 250000000}
 ]
 
+var jobMap = [
+    {name: "勇士", code: 100},
+    {name: "魔法师", code: 200},
+    {name: "弓箭手", code: 300},
+    {name: "飞侠", code: 400},
+    {name: "刺客", code: 410}
+]
+
 function handleMenu() {
     var sendStr = "快捷服务：\r\n\r\n#b";
     for (var i = 0; i < menu.length; i++) {
@@ -50,8 +58,16 @@ function handleMap() {
 
 function handleMonsterMap() {
     var sendStr = "练级地图：\r\n\r\n#b";
-    for (var i = 0; i < maps.length; i++) {
-        sendStr += "#L" + (2000 + i) + "#" + maps[i].name + "#l\r\n";
+    for (var i = 0; i < monsterMaps.length; i++) {
+        sendStr += "#L" + (2000 + i) + "#" + monsterMaps[i].name + "#l\r\n";
+    }
+    return sendStr;
+}
+
+function handleJobMap() {
+    var sendStr = "职业：\r\n\r\n#b";
+    for (var i = 0; i < jobMap.length; i++) {
+        sendStr += "#L" + (3000 + i) + "#" + jobMap[i].name + "#l\r\n";
     }
     return sendStr;
 }
@@ -75,22 +91,27 @@ function action(mode, type, selection) {
         } else if (status == 1) {
             if (selection == 0) {
                 cm.sendSimple(handleMap());
-            }else if (selection == 1) {
+            } else if (selection == 1) {
                 cm.sendSimple(handleMonsterMap());
             } else {
-                cm.sendSimple("功能待完善");
+                cm.sendSimple(handleJobMap());
             }
         } else if (status == 2) {
             if (selection >= 1000 && selection < 2000) {
                 var mapId = maps[selection - 1000].code;
                 cm.getPlayer().changeMap(mapId);
                 cm.dispose();
-            }else if (selection >= 2000 && selection < 3000) {
-                var mapId = maps[selection - 2000].code;
+            } else if (selection >= 2000 && selection < 3000) {
+                var mapId = monsterMaps[selection - 2000].code;
                 cm.getPlayer().changeMap(mapId);
                 cm.dispose();
-            }else {
+            } else if (selection >= 3000 && selection < 4000) {
+                var jobId = jobMap[selection - 3000].code;
+                cm.getPlayer().changeJob(jobId);
+                cm.getPlayer().equipChanged();
+            } else {
                 cm.sendSimple("功能待完善");
+                cm.dispose();
             }
         } else {
             cm.dispose();
