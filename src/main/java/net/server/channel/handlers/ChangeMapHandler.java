@@ -76,6 +76,8 @@ public final class ChangeMapHandler extends AbstractMaplePacketHandler {
             try {
                 slea.readByte(); // 1 = from dying 0 = regular portals
                 int targetid = slea.readInt();
+                // 打印地图
+                chr.dropMessage(6, "enter map: " + targetid);
                 String startwp = slea.readMapleAsciiString();
                 MaplePortal portal = chr.getMap().getPortal(startwp);
                 slea.readByte();
@@ -102,7 +104,6 @@ public final class ChangeMapHandler extends AbstractMaplePacketHandler {
                             }
                         }
                     } else {
-                        chr.dropMessage("地图: " + targetid);
                         if (chr.isGM()) {
                             MapleMap to = chr.getWarpMap(targetid);
                             chr.changeMap(to, to.getPortal(0));

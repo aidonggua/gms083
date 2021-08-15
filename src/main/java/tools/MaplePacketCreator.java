@@ -727,8 +727,11 @@ public class MaplePacketCreator {
         mplew.write(c.getGender());
 
         boolean canFly = Server.getInstance().canFly(c.getAccID());
-        mplew.writeBool((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) ? c.getGMLevel() > 1 : false);    // thanks Steve(kaito1410) for pointing the GM account boolean here
-        mplew.write(((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) && c.getGMLevel() > 1) ? 0x80 : 0);  // Admin Byte. 0x80,0x40,0x20.. Rubbish.
+        // 魔改：普通玩家也能飞
+//        mplew.writeBool((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) ? c.getGMLevel() > 1 : false);    // thanks Steve(kaito1410) for pointing the GM account boolean here
+        mplew.writeBool((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) ? c.getGMLevel() >= 0 : false);    // thanks Steve(kaito1410) for pointing the GM account boolean here
+//        mplew.write(((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) && c.getGMLevel() > 1) ? 0x80 : 0);  // Admin Byte. 0x80,0x40,0x20.. Rubbish.
+        mplew.write(((YamlConfig.config.server.USE_ENFORCE_ADMIN_ACCOUNT || canFly) && c.getGMLevel() >= 0) ? 0x80 : 0);  // Admin Byte. 0x80,0x40,0x20.. Rubbish.
         mplew.write(0); // Country Code.
 
         mplew.writeMapleAsciiString(c.getAccountName());
