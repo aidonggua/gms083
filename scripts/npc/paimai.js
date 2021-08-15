@@ -3,8 +3,22 @@
 importPackage(Packages.client.command);
 
 var status;
-var menu = ["传送", "专职"]
+var menu = ["传送", "练级传送", "专职"]
 var maps = [
+    {name: "自由市场", code: 910000000},
+    {name: "彩虹村", code: 1000000},
+    {name: "明珠港", code: 104000000},
+    {name: "魔法密林", code: 101000000},
+    {name: "射手村", code: 100000000},
+    {name: "废弃都市", code: 103000000},
+    {name: "勇士部落", code: 102000000},
+    {name: "天空之城", code: 104000000},
+    {name: "阿里安特", code: 260000000},
+    {name: "童话村", code: 222000000},
+    {name: "武陵", code: 250000000}
+]
+
+var monsterMaps = [
     {name: "自由市场", code: 910000000},
     {name: "彩虹村", code: 1000000},
     {name: "明珠港", code: 104000000},
@@ -34,6 +48,14 @@ function handleMap() {
     return sendStr;
 }
 
+function handleMonsterMap() {
+    var sendStr = "练级地图：\r\n\r\n#b";
+    for (var i = 0; i < maps.length; i++) {
+        sendStr += "#L" + (2000 + i) + "#" + maps[i].name + "#l\r\n";
+    }
+    return sendStr;
+}
+
 function start() {
     status = -1;
     action(1, 0, 0);
@@ -53,6 +75,8 @@ function action(mode, type, selection) {
         } else if (status == 1) {
             if (selection == 0) {
                 cm.sendSimple(handleMap());
+            }else if (selection == 1) {
+                cm.sendSimple(handleMonsterMap());
             } else {
                 cm.sendSimple("功能待完善");
             }
@@ -61,7 +85,11 @@ function action(mode, type, selection) {
                 var mapId = maps[selection - 1000].code;
                 cm.getPlayer().changeMap(mapId);
                 cm.dispose();
-            } else {
+            }else if (selection >= 2000 && selection < 3000) {
+                var mapId = maps[selection - 2000].code;
+                cm.getPlayer().changeMap(mapId);
+                cm.dispose();
+            }else {
                 cm.sendSimple("功能待完善");
             }
         } else {
