@@ -1154,6 +1154,13 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
         }, 777);
     }
 
+    /**
+     * 增加一个转职功能给脚本用
+     */
+    public synchronized void changeJob(String newJob) {
+        changeJob(MapleJob.getById(Integer.parseInt(newJob)));
+    }
+
     public synchronized void changeJob(MapleJob newJob) {
         if (newJob == null) {
             return;//the fuck you doing idiot!
@@ -6434,9 +6441,7 @@ public class MapleCharacter extends AbstractMapleCharacterObject {
             return;
         }
 
-        // 魔改：升级给10点技能点
-        // int spGain = 3;
-        int spGain = 10;
+         int spGain = 3;
         if (YamlConfig.config.server.USE_ENFORCE_JOB_SP_RANGE && !GameConstants.hasSPTable(job)) {
             spGain = getSpGain(spGain, job);
         }
