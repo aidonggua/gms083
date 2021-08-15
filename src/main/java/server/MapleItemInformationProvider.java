@@ -968,6 +968,9 @@ public class MapleItemInformationProvider {
                 || nEquip.getUpgradeSlots() < (byte) (eqstats.get("tuc") + nEquip.getVicious());
     }
 
+    /**
+     * 砸卷
+     */
     public Item scrollEquipWithId(Item equip, int scrollId, boolean usingWhiteScroll, int vegaItemId, boolean isGM) {
         boolean assertGM = (isGM && YamlConfig.config.server.USE_PERFECT_GM_SCROLL);
 
@@ -994,7 +997,8 @@ public class MapleItemInformationProvider {
                         break;
                 }
 
-                if (assertGM || rollSuccessChance(prop)) {
+                // 魔改: 砸卷必定成功
+                if (assertGM || rollSuccessChance(prop) || true) {
                     short flag = nEquip.getFlag();
                     switch (scrollId) {
                         case 2040727:
