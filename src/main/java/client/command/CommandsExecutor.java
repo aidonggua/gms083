@@ -211,6 +211,9 @@ public class CommandsExecutor {
         addCommand("mylawn", MapOwnerClaimCommand.class);
         addCommand("bosshp", BossHpCommand.class);
         addCommand("mobhp", MobHpCommand.class);
+
+        // 魔改：普通用户也可以飞
+        addCommand("fly", 3, FlyCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
