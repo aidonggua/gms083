@@ -213,7 +213,7 @@ public class CommandsExecutor {
         addCommand("mobhp", MobHpCommand.class);
 
         // 魔改：普通用户也可以飞
-        addCommand("fly", 3, FlyCommand.class);
+        addCommand("fly", 0, FlyCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -278,7 +278,7 @@ public class CommandsExecutor {
         levelCommandsCursor = new Pair<>((List<String>) new ArrayList<String>(), (List<String>) new ArrayList<String>());
         
         addCommand("debuff", 3, DebuffCommand.class);
-        addCommand("fly", 3, FlyCommand.class);
+//        addCommand("fly", 3, FlyCommand.class);
         addCommand("spawn", 3, SpawnCommand.class);
         addCommand("mutemap", 3, MuteMapCommand.class);
         addCommand("checkdmg", 3, CheckDmgCommand.class);
