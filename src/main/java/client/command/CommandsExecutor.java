@@ -212,8 +212,12 @@ public class CommandsExecutor {
         addCommand("bosshp", BossHpCommand.class);
         addCommand("mobhp", MobHpCommand.class);
 
-        // 魔改：普通用户也可以飞
+        // 魔改: 普通用户也可以飞
         addCommand("fly", 0, FlyCommand.class);
+        // 魔改: 普通用户也可以查看地图信息
+        addCommand("whereami", 0, WhereaMiCommand.class);
+        // 魔改: 普通用户也可以传送
+        addCommand("goto", 0, GotoCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -225,7 +229,7 @@ public class CommandsExecutor {
         addCommand("whatdropsfrom", 1, WhatDropsFromCommand.class);
         addCommand("whodrops", 1, WhoDropsCommand.class);
         addCommand("buffme", 1, BuffMeCommand.class);
-        addCommand("goto", 1, GotoCommand.class);
+//        addCommand("goto", 1, GotoCommand.class);
         
         commandsNameDesc.add(levelCommandsCursor);
     }
@@ -235,7 +239,7 @@ public class CommandsExecutor {
         levelCommandsCursor = new Pair<>((List<String>) new ArrayList<String>(), (List<String>) new ArrayList<String>());
         
         addCommand("recharge", 2, RechargeCommand.class);
-        addCommand("whereami", 2, WhereaMiCommand.class);
+//        addCommand("whereami", 2, WhereaMiCommand.class);
         addCommand("hide", 2, HideCommand.class);
         addCommand("unhide", 2, UnHideCommand.class);
         addCommand("sp", 2, SpCommand.class);

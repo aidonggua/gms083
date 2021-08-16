@@ -12,6 +12,7 @@ var maps = [
     {name: "射手村", code: 100000000},
     {name: "废弃都市", code: 103000000},
     {name: "勇士部落", code: 102000000},
+    {name: "林中之城", code: 105040400},
     {name: "天空之城", code: 104000000},
     {name: "阿里安特", code: 260000000},
     {name: "童话村", code: 222000000},
@@ -19,17 +20,9 @@ var maps = [
 ]
 
 var monsterMaps = [
-    {name: "自由市场", code: 910000000},
-    {name: "彩虹村", code: 1000000},
-    {name: "明珠港", code: 104000000},
-    {name: "魔法密林", code: 101000000},
-    {name: "射手村", code: 100000000},
-    {name: "废弃都市", code: 103000000},
-    {name: "勇士部落", code: 102000000},
-    {name: "天空之城", code: 104000000},
-    {name: "阿里安特", code: 260000000},
-    {name: "童话村", code: 222000000},
-    {name: "武陵", code: 250000000}
+    {name: "林中之城-蚂蚁广场-30", code: 105070000},
+    {name: "林中之城-冰独眼兽洞穴-50", code: 105080000},
+    {name: "林中之城-巨人之林-50", code: 105040305}
 ]
 
 var jobMap = [
@@ -37,7 +30,12 @@ var jobMap = [
     {name: "魔法师", code: 200},
     {name: "弓箭手", code: 300},
     {name: "飞侠", code: 400},
-    {name: "刺客", code: 410}
+    {name: "刺客", code: 410},
+    {name: "侠客", code: 420},
+    {name: "无影人", code: 411},
+    {name: "独行客", code: 421},
+    {name: "隐士", code: 412},
+    {name: "侠盗", code: 422}
 ]
 
 function handleMenu() {
