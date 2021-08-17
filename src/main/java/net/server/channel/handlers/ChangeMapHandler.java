@@ -143,9 +143,6 @@ public final class ChangeMapHandler extends AbstractMaplePacketHandler {
                     }
                 }
 
-                // 打印地图
-                chr.dropMessage(6, "enter map: " + chr.getMapId());
-
                 if (portal != null && !portal.getPortalStatus()) {
                     c.announce(MaplePacketCreator.blockedMessage(1));
                     c.announce(MaplePacketCreator.enableActions());

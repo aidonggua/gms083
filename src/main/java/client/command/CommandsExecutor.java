@@ -218,7 +218,9 @@ public class CommandsExecutor {
         addCommand("whereami", 0, WhereaMiCommand.class);
         // 魔改: 普通用户也可以传送
         addCommand("goto", 0, GotoCommand.class);
-        
+        // 魔改: 增加打印第一个道具的id命令
+        addCommand("itemid", 0, ItemIdCommand.class);
+
         commandsNameDesc.add(levelCommandsCursor);
     }
 
