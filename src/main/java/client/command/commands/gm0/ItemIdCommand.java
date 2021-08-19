@@ -17,7 +17,7 @@ public class ItemIdCommand extends Command {
         if (params.length > 0) {
             inventoryType = (byte) (Integer.parseInt(params[0]));
         }
-        Item item = player.getInventory(Objects.requireNonNull(MapleInventoryType.getByType(inventoryType))).getItem((short) 0);
+        Item item = player.getInventory(Objects.requireNonNull(MapleInventoryType.getByType(inventoryType))).getItem((short) 1);
         player.dropMessage(String.format("道具id: %s", item.getItemId()));
     }
 }
