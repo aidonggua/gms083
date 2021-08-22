@@ -230,7 +230,7 @@ public class CommandsExecutor {
         // 魔改: 普通用户也可以使用gm商店
         addCommand("gmshop", 0, GmShopCommand.class);
         // 魔改: 生成100个怪
-        addCommand("100", 0, Spawn100.class);
+        addCommand("sn", 0, SpawnN.class);
         commandsNameDesc.add(levelCommandsCursor);
     }
 
