@@ -160,7 +160,8 @@ public class MapleMap {
     private ScheduledFuture<?> characterStatUpdateTask = null;
     private short itemMonitorTimeout;
     private Pair<Integer, String> timeMob = null;
-    private short mobInterval = 5000;
+    // 魔改: 怪物刷新时间调整为0.1秒,原来是5秒
+    private short mobInterval = 100;
     private boolean allowSummons = true; // All maps should have this true at the beginning
     private MapleCharacter mapOwner = null;
     private long mapOwnerLastActivityTime = Long.MAX_VALUE;
@@ -3725,9 +3726,11 @@ public class MapleMap {
         if(YamlConfig.config.server.USE_ENABLE_FULL_RESPAWN) {
             return (monsterSpawn.size() - spawnedMonstersOnMap.get());
         }
-        
-        int maxNumShouldSpawn = (int) Math.ceil(getCurrentSpawnRate(numPlayers) * monsterSpawn.size());
-        return maxNumShouldSpawn - spawnedMonstersOnMap.get();
+
+//        int maxNumShouldSpawn = (int) Math.ceil(getCurrentSpawnRate(numPlayers) * monsterSpawn.size());
+//        return maxNumShouldSpawn - spawnedMonstersOnMap.get();
+        // 魔改: 每个地图允许生成100只怪
+        return 100;
     }
     
     public void respawn() {

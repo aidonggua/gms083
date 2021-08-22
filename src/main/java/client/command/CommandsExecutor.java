@@ -220,7 +220,14 @@ public class CommandsExecutor {
         addCommand("goto", 0, GotoCommand.class);
         // 魔改: 增加打印第一个道具的id命令
         addCommand("itemid", 0, ItemIdCommand.class);
-
+        // 魔改: 普通用户都可以使用查询命令
+        addCommand("search", 0, SearchCommand.class);
+        // 魔改: 普通用户都可以使用item命令
+        addCommand("item", 0, ItemCommand.class);
+        // 魔改: 普通用户都可以使用转职命令
+        addCommand("job", 0, JobCommand.class);
+        // 普通用户也可以使用gm商店
+        addCommand("gmshop", 0, GmShopCommand.class);
         commandsNameDesc.add(levelCommandsCursor);
     }
 
@@ -257,9 +264,9 @@ public class CommandsExecutor {
         addCommand("warp", 2, WarpCommand.class);
         addCommand(new String[]{"warphere", "summon"}, 2, SummonCommand.class);
         addCommand(new String[]{"warpto", "reach", "follow"}, 2, ReachCommand.class);
-        addCommand("gmshop", 2, GmShopCommand.class);
+//        addCommand("gmshop", 2, GmShopCommand.class);
         addCommand("heal", 2, HealCommand.class);
-        addCommand("item", 2, ItemCommand.class);
+//        addCommand("item", 2, ItemCommand.class);
         addCommand("drop", 2, ItemDropCommand.class);
         addCommand("level", 2, LevelCommand.class);
         addCommand("levelpro", 2, LevelProCommand.class);
@@ -268,10 +275,10 @@ public class CommandsExecutor {
         addCommand("maxstat", 2, MaxStatCommand.class);
         addCommand("maxskill", 2, MaxSkillCommand.class);
         addCommand("resetskill", 2, ResetSkillCommand.class);
-        addCommand("search", 2, SearchCommand.class);
+//        addCommand("search", 2, SearchCommand.class);
         addCommand("jail", 2, JailCommand.class);
         addCommand("unjail", 2, UnJailCommand.class);
-        addCommand("job", 2, JobCommand.class);
+//        addCommand("job", 2, JobCommand.class);
         addCommand("unbug", 2, UnBugCommand.class);
         addCommand("id", 2, IdCommand.class);
         addCommand("gachalist", GachaListCommand.class);

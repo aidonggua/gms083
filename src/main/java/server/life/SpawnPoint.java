@@ -30,7 +30,8 @@ public class SpawnPoint {
     private int monster, mobTime, team, fh, f;
     private Point pos;
     private long nextPossibleSpawn;
-    private int mobInterval = 5000;
+    // 魔改: 怪物刷新时间改为0.1秒,原本是5秒
+    private int mobInterval = 100;
     private AtomicInteger spawnedMonsters = new AtomicInteger(0);
     private boolean immobile, denySpawn = false;
 
