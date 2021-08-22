@@ -2,8 +2,11 @@ package client.command.commands.gm0;
 
 import client.MapleClient;
 import client.command.Command;
+import server.life.MapleLifeFactory;
 import server.life.MapleMonster;
 import server.maps.MapleMap;
+
+import java.util.Objects;
 
 public class SpawnN extends Command {
 
@@ -14,7 +17,7 @@ public class SpawnN extends Command {
         MapleMap map = client.getPlayer().getMap();
         MapleMonster mapleMonster = map.getAllMonsters().get(monster);
         for (int i = 0; i < number; i++) {
-            map.spawnMonster(mapleMonster);
+            map.spawnMonsterOnGroundBelow(Objects.requireNonNull(MapleLifeFactory.getMonster(mapleMonster.getId())), client.getPlayer().getPosition());
         }
     }
 }
