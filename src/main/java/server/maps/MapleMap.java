@@ -3212,7 +3212,10 @@ public class MapleMap {
         SpawnPoint sp = new SpawnPoint(monster, newpos, !monster.isMobile(), mobTime, mobInterval, team);
         monsterSpawn.add(sp);
         if (sp.shouldSpawn() || mobTime == -1) {// -1 does not respawn and should not either but force ONE spawn
-            spawnMonster(sp.getMonster());
+            // 魔改: 5倍生怪
+            for (int i = 0; i < 5; i++) {
+                spawnMonster(sp.getMonster());
+            }
         }
     }
     
