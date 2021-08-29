@@ -23,6 +23,7 @@
 */
 package client.command;
 
+import client.MapleClient;
 import client.command.commands.gm0.*;
 import client.command.commands.gm1.*;
 import client.command.commands.gm2.*;
@@ -30,18 +31,11 @@ import client.command.commands.gm3.*;
 import client.command.commands.gm4.*;
 import client.command.commands.gm5.*;
 import client.command.commands.gm6.*;
-
-import client.MapleClient;
-
 import tools.FilePrinter;
 import tools.Pair;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.*;
 
 public class CommandsExecutor {
 
@@ -231,6 +225,9 @@ public class CommandsExecutor {
         addCommand("gmshop", 0, GmShopCommand.class);
         // 魔改: 生成100个怪
         addCommand("sn", 0, SpawnN.class);
+        // 魔改: 普通用户也可以满技能
+        addCommand("maxskill", 0, MaxSkillCommand.class);
+        addCommand("resetskill", 0, ResetSkillCommand.class);
         commandsNameDesc.add(levelCommandsCursor);
     }
 
@@ -276,8 +273,8 @@ public class CommandsExecutor {
         addCommand("setslot", 2, SetSlotCommand.class);
         addCommand("setstat", 2, SetStatCommand.class);
         addCommand("maxstat", 2, MaxStatCommand.class);
-        addCommand("maxskill", 2, MaxSkillCommand.class);
-        addCommand("resetskill", 2, ResetSkillCommand.class);
+//        addCommand("maxskill", 2, MaxSkillCommand.class);
+//        addCommand("resetskill", 2, ResetSkillCommand.class);
 //        addCommand("search", 2, SearchCommand.class);
         addCommand("jail", 2, JailCommand.class);
         addCommand("unjail", 2, UnJailCommand.class);
