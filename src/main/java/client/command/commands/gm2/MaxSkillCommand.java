@@ -41,11 +41,17 @@ public class MaxSkillCommand extends Command {
         for (MapleData skill_ : MapleDataProviderFactory.getDataProvider(new File(System.getProperty("wzpath") + "/" + "String.wz")).getData("Skill.img").getChildren()) {
             try {
                 Skill skill = SkillFactory.getSkill(Integer.parseInt(skill_.getName()));
+                // 魔改: 跳过海盗的冲刺技能
+                if (skill == null || skill.getId() == 5001005) {
+                    continue;
+                }
                 player.changeSkillLevel(skill, (byte) skill.getMaxLevel(), skill.getMaxLevel(), -1);
             } catch (NumberFormatException nfe) {
                 nfe.printStackTrace();
                 break;
-            } catch (NullPointerException npe) { }
+            } catch (NullPointerException npe) {
+                System.out.println("技能不存在: " + skill_.getName());
+            }
         }
 
         if (player.getJob().isA(MapleJob.ARAN1) || player.getJob().isA(MapleJob.LEGEND)) {
