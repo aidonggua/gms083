@@ -228,6 +228,8 @@ public class CommandsExecutor {
         // 魔改: 普通用户也可以满技能
         addCommand("maxskill", 0, MaxSkillCommand.class);
         addCommand("resetskill", 0, ResetSkillCommand.class);
+        // 魔改: 普通男用户可以修改经验倍率
+        addCommand("exprate", 0, ExpRateCommand.class);
         commandsNameDesc.add(levelCommandsCursor);
     }
 
@@ -359,7 +361,7 @@ public class CommandsExecutor {
         addCommand("servermessage", 4, ServerMessageCommand.class);
         addCommand("proitem", 4, ProItemCommand.class);
         addCommand("seteqstat", 4, SetEqStatCommand.class);
-        addCommand("exprate", 4, ExpRateCommand.class);
+//        addCommand("exprate", 4, ExpRateCommand.class);
         addCommand("mesorate", 4, MesoRateCommand.class);
         addCommand("droprate", 4, DropRateCommand.class);
         addCommand("bossdroprate", 4, BossDropRateCommand.class);
