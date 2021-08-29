@@ -21,57 +21,29 @@
  */
 package server;
 
-import java.io.File;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.HashSet;
-
-import config.YamlConfig;
-import net.server.Server;
-import provider.MapleData;
-import provider.MapleDataDirectoryEntry;
-import provider.MapleDataFileEntry;
-import provider.MapleDataProvider;
-import provider.MapleDataProviderFactory;
-import provider.MapleDataTool;
-import tools.DatabaseConnection;
-import tools.FilePrinter;
-import tools.MaplePacketCreator;
-import tools.Pair;
-import tools.Randomizer;
-import client.MapleCharacter;
-import client.MapleClient;
-import client.MapleJob;
-import client.Skill;
-import client.SkillFactory;
+import client.*;
 import client.autoban.AutobanFactory;
-import client.inventory.Equip;
-import client.inventory.Item;
-import client.inventory.MapleInventory;
-import client.inventory.MapleInventoryType;
-import client.inventory.MapleWeaponType;
+import client.inventory.*;
+import config.YamlConfig;
 import constants.inventory.EquipSlot;
 import constants.inventory.ItemConstants;
 import constants.skills.Assassin;
 import constants.skills.Gunslinger;
 import constants.skills.NightWalker;
-
-import java.sql.Connection;
-
+import net.server.Server;
+import provider.*;
 import server.MakerItemFactory.MakerItemCreateEntry;
-import server.life.MapleMonsterInformationProvider;
 import server.life.MapleLifeFactory;
-import tools.StringUtil;
+import server.life.MapleMonsterInformationProvider;
+import tools.*;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * @author Matze
@@ -1060,7 +1032,7 @@ public class MapleItemInformationProvider {
         Equip nEquip = (Equip) equip;
         byte level = nEquip.getLevel();
         if (level > 100) {
-            nEquip.setLevel((byte) 10);
+            nEquip.setLevel((byte) 100);
         }
         nEquip.setUpgradeSlots((byte) 10);
     }

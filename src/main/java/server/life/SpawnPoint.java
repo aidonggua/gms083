@@ -22,16 +22,16 @@
 package server.life;
 
 import client.MapleCharacter;
-import java.awt.Point;
-import java.util.concurrent.atomic.AtomicInteger;
 import net.server.Server;
+
+import java.awt.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SpawnPoint {
     private int monster, mobTime, team, fh, f;
     private Point pos;
     private long nextPossibleSpawn;
-    // 魔改: 怪物刷新时间改为0.1秒,原本是5秒
-    private int mobInterval = 100;
+    private int mobInterval = 5000;
     private AtomicInteger spawnedMonsters = new AtomicInteger(0);
     private boolean immobile, denySpawn = false;
 
