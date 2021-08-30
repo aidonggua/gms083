@@ -174,7 +174,7 @@ public class MapleStatEffect {
     private static MapleStatEffect loadFromData(MapleData source, int sourceid, boolean skill, boolean overTime) {
         MapleStatEffect ret = new MapleStatEffect();
 //        ret.duration = MapleDataTool.getIntConvert("time", source, -1);
-        // 魔改: 技能持续时间改成10倍
+        // 魔改: 道具和技能效果持续时间改成10倍
         ret.duration = MapleDataTool.getIntConvert("time", source, -1) * 10;
         ret.hp = (short) MapleDataTool.getInt("hp", source, 0);
         ret.hpR = MapleDataTool.getInt("hpR", source, 0) / 100.0;
@@ -207,7 +207,9 @@ public class MapleStatEffect {
         ret.nuffSkill = MapleDataTool.getInt("nuffSkill", source, 0);
 
         ret.mobCount = MapleDataTool.getInt("mobCount", source, 1);
-        ret.cooldown = MapleDataTool.getInt("cooltime", source, 0);
+        // 魔改: 道具和技能效果冷却时间改成0
+//        ret.cooldown = MapleDataTool.getInt("cooltime", source, 0);
+        ret.cooldown = 0;
         ret.morphId = MapleDataTool.getInt("morph", source, 0);
         ret.ghost = MapleDataTool.getInt("ghost", source, 0);
         ret.fatigue = MapleDataTool.getInt("incFatigue", source, 0);
